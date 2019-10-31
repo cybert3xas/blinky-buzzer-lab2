@@ -38,6 +38,6 @@ switch_interrupt_handler()
   
   switch_state_changed = 1;
   led_update();
-  soundState();
+  soundState(switch_state_down3);
   
 }
