@@ -1,4 +1,7 @@
-/*Method will handle the state for the buzzing sound, this method
-is in charge of making the P2.6 generate sound when clicked the first time.
-The sconed the button is pressed, the buzzer will stop*/
-void soundState(char);
+#ifndef stateMachine_include
+#define stateMachine_include
+
+/*Method will be in charge of the stateMaching*/
+void sm_update_led();
+#endif //include
+

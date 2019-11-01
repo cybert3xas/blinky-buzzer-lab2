@@ -3,21 +3,27 @@
 #include "switches.h"
 #include "led.h"
 #include "stateMachine.h"
+#include "buzzer.h"
 
-char switch_state_down1,switch_state_down2,switch_state_down3,switch_state_down4,switch_state_changed; /* effectively boolean */
+char switch_state_down1,
+     switch_state_down2,
+     switch_state_down3,
+     switch_state_down4,
+     switch_state_changed;        /* effectively boolean */
 
-static char 
-switch_update_interrupt_sense()
+char ledMode =0;
+
+static char switch_update_interrupt_sense()
 {
   char p2val = P2IN;
+  
   /* update switch interrupt to detect changes from current buttons */
   P2IES |= (p2val & SWITCHES);	/* if switch up, sense down */
   P2IES &= (p2val | ~SWITCHES);	/* if switch down, sense up */
   return p2val;
 }
 
-void 
-switch_init()			/* setup switch */
+void switch_init()		/* setup switch */
 {  
   P2REN |= SWITCHES;		/* enables resistors for switches */
   P2IE = SWITCHES;		/* enable interrupts from switches */
@@ -27,8 +33,7 @@ switch_init()			/* setup switch */
   led_update();
 }
 
-void
-switch_interrupt_handler()
+void switch_interrupt_handler()
 {
   char p2val = switch_update_interrupt_sense();
   switch_state_down1 = (p2val & SW1) ? 0 : 1; /* 0 when SW1 is up */
@@ -36,8 +41,20 @@ switch_interrupt_handler()
   switch_state_down3 = (p2val & SW3) ? 0 : 1; /* 0 when SW3 is up */
   switch_state_down4 = (p2val & SW4) ? 0 : 1; /* 0 when SW4 is up */
   
-  switch_state_changed = 1;
-  led_update();
-  soundState(switch_state_down3);
+  if(switch_state_down1){
+    ledMode =1; //red
+  }
+  
+  if(switch_state_down2){
+    ledMode = 2; //green
+  }
+
+  if(switch_state_down3){
+    ledMode = 3; //beep sounds
+  }
+  
+  if(switch_state_down4){
+    ledMode = 4; //dimLights
+  }
   
 }

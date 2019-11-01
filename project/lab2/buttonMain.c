@@ -7,6 +7,7 @@
 
 void main(void){
   configureClocks();
+  enableWDTInterrupts();
   switch_init();
   led_init();
   buzzer_init();
