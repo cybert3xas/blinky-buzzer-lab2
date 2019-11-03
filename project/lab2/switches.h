@@ -16,6 +16,6 @@ extern char switch_state_down1,
             switch_state_down3,
             switch_state_down4,
             switch_state_changed,
-            ledMode;             /* effectively boolean */
+            ledMode;/* effectively boolean */
 
 #endif // included
