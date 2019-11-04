@@ -5,12 +5,11 @@
 #include "led.h"
 
 static char pwmCount = 0;
-
 void sm_update_led()
 {
   pwmCount = (pwmCount+1)%3; //range from 0-2
-
   static char new_red, new_green;
+  
   switch(ledMode){
   case 1:
     new_red= 1;
@@ -21,7 +20,14 @@ void sm_update_led()
     new_green=0;
     break;
   case 3:
-    buzzer_set_period(1000);
+    switch(buzzerChange){
+    case 0:
+      buzzer_set_period(3500);
+      break;
+    case 1:
+      buzzer_set_period(0);
+      break;
+    }
     break; //break from the main switch statement
     /*Case 3 switch statment ends here*/
   case 4:

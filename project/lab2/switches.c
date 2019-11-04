@@ -11,6 +11,7 @@ char switch_state_down1,
      switch_state_changed;        /* effectively boolean */
 
 char ledMode =0;
+char buzzerChange =0;
 
 static char switch_update_interrupt_sense()
 {
@@ -49,7 +50,13 @@ void switch_interrupt_handler()
   }
 
   if(switch_state_down3){
-    ledMode = 3; //beep sounds
+    if(buzzerChange){
+      ledMode = 3;
+      buzzerChange =0;
+    }else{
+      ledMode = 3; //beep sounds
+      buzzerChange =1;
+    }
   }
   
   if(switch_state_down4){
