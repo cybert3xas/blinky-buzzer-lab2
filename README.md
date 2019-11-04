@@ -1,25 +1,19 @@
 # Lab 2: Blinky-Buzzy Toy
 
-For your second project, your task is to use the MSP430 Microcontroller and your creativity to design a toy. Each MSP430 board is equipped with buttons, LED's, a speaker, and an LED screen. Utilizing these features and your knowledge of I/O, develop a program to turn the board into a toy.
+This program is designed to react to user's inputs via interrupts. The purpose of this assignment was to successfully program an MSP430 to produce sound frequencies and lights. 
+In addition, the program employed a state machine to undergo the changes in state functions. 
 
-This toy should at minimum:
+## Instructions 
+* Connect MSP430 to the computer via USB 
+* Under the 'project's directory run the 'make' command
 
-* generate sounds,
-* dynamically change the LEDs that are illuminated, both brighly and dimmly,
-* implement a state machine to maintain the state of the toy,
-* and use the four buttons on the expansion board (P2.0-3) to transition the state machine.
+(Make command compiles all the files and makes sure they're communicating correctly. 
+In addition it flashes the MSP430 using the '.elf' file)
 
-**Furthermore, at least one of the functions to transition the state machine must be written by you in assembly language.**
 
-## Getting Started 
-
-Inside this repository you will find two directories:
-1. The 'demos' directory contains sample programs for you to review and learn from. These example programs are a great starting point in understanding how to program the MSP430 microcontroller. See the readme in the demo directory on how to compile and run the demo programs.
-2. The 'project' directory should contain the source code for your toy.
-
-## What Should Be In Your Repo
-
-Your project will be graded on the following items:
-* Source code for your toy (only .c, .s and .h files).
-* A README containing a description of your toy, how to compile it, how to run it, and how to use it.
-* A Makefile with appropriate rules to build and clean your toy.
+## State Machine
+Each button has a functionality associated:
+1. The first button lights up both the green and red LEDS
+2. The second button turns off both LEDS
+3. The third button (when pressed for the first time) generates a buzzing sound. When the button is pressed for the second time, the buzzer sound comes to an end.
+4. The fourth button dims both the green and red LEDS.
